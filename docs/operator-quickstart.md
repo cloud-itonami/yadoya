@@ -23,24 +23,23 @@ npx vitest run                                # 12 tests
 | Path | What it is | Runs today? |
 |---|---|---|
 | `kotoba/` | TypeScript library: listings + bookings on AT PDS records, on-chain USDC settlement via TitheRouter (10% tithe). 718 lines incl. tests. | **Yes** — walked below |
-| `worker/` | Cloudflare Worker (`etzhayyim-yadoya`) serving `yadoya.etzhayyim.com`, SvelteKit edge BFF. `main` points at a `.svelte-kit/` build output. | Not walked in this iteration |
-| `appview/yadoya-ui-b7r4n2xq/svelte/` | Svelte 5 + Vite UI. | **No** — see below |
+| `worker/` | Cloudflare Worker (`etzhayyim-yadoya`) serving `yadoya.etzhayyim.com`. `main` is `worker/src/app.ts`; assets serve from `web/dist` (the CLJS build). | Not walked in this iteration |
+| `src/` + `web/` | Hotel-search appview UI: shadow-cljs + reagent + kotoba-ui (ported from the former Svelte 5 appview in the svelte→cljs migration). | **Yes** — see "Building the UI" below |
 
-`appview` cannot be installed from this repo at all. It declares
-`"@etzhayyim/design-system": "workspace:*"`, but the repo has no workspace root
-(no top-level `package.json`, no `pnpm-workspace.yaml`), so the sibling package
-does not exist here:
+## Building the UI (post svelte→cljs migration)
 
+The former `appview/yadoya-ui-b7r4n2xq/svelte/` and `worker/svelte/` trees are
+gone — the UI is now top-level `src/` + `web/` built by shadow-cljs, so the old
+`@etzhayyim/design-system` `workspace:*` install failure no longer applies.
+
+```sh
+npm install                                  # react + react-dom only
+clojure -M:cljs -m shadow.cljs.devtools.cli compile app   # emits web/dist/js/main.js
 ```
-ERR_PNPM_WORKSPACE_PKG_NOT_FOUND  In : "@etzhayyim/design-system@workspace:*" is in the
-  dependencies but no package named "@etzhayyim/design-system" is present in the workspace
-```
 
-(one line in the original; wrapped here)
-
-That is an artifact of the extraction (`chore: extract yadoya app from root`) —
-the workspace sibling did not come across with it. Fixing it means either
-vendoring the design system or restoring a workspace root; neither is done here.
+`deps.edn` resolves `io.github.kotoba-lang/appkit` by `:local/root` relative to
+this repo's checkout inside the west workspace, so the compile must run from a
+west checkout or a worktree under `orgs/`.
 
 ## The install gotcha
 
