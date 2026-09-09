@@ -6,7 +6,7 @@
   driving an XRPC com.etzhayyim.apps.yadoya.searchHotels query, with
   loading / error / empty states and a hotel result list. Single reagent
   atom, murakumo-studio構成."
-  (:require [clojure.string :as str]
+  (:require [kotoba.lang.text :as str]
             [reagent.core :as r]))
 
 (defonce state
