@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "etzhayyim-yadoya",
-  "main": "svelte/.svelte-kit/cloudflare/_worker.js",
+  "main": "./worker/src/app.ts",
   "compatibility_date": "2026-04-15",
   "compatibility_flags": [
     "nodejs_compat",
@@ -32,7 +32,7 @@
     "enabled": true
   },
   "assets": {
-    "directory": "./svelte/.svelte-kit/cloudflare/client",
+    "directory": "./web/dist",
     "binding": "ASSETS",
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "none"

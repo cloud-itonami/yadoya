@@ -56,7 +56,7 @@ Autonomous hotel search and reservation platform delivered as App components.
 
 - performer/rdbms (cypher graph RDBMS) persistence
 - Performer framework migration (70-tools/performer)
-- SvelteKit frontend → B2 per-site bucket (yadoya-etzhayyim-ai)
+- CLJS appview UI (shadow-cljs + reagent + kotoba-ui, web/dist) → Cloudflare Worker assets; former SvelteKit frontend removed in the svelte→cljs migration
 - XRPC API (proto/etzhayyim/yadoya/v1/yadoya.proto)
 - Real-time price collection via wasi:http/outgoing-handler
 - Hotel catalog expansion: 100+ properties
