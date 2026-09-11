@@ -1,8 +1,8 @@
 node_modules/
 .shadow-cljs/
 .cpcache/
-# shadow-cljs build output (regenerate: npx shadow-cljs compile app,
-# or clojure -M:cljs -m shadow.cljs.devtools.cli compile app).
+# shadow-cljs build output (regenerate: amu compile --target wasm32-browser app,
+# or kbb -M:cljs -m shadow.cljs.devtools.cli compile app).
 # vendor/kotoba-ui.css IS tracked (worker assets serve from web/dist).
 web/dist/js/
 

@@ -34,7 +34,7 @@ gone — the UI is now top-level `src/` + `web/` built by shadow-cljs, so the ol
 
 ```sh
 npm install                                  # react + react-dom only
-clojure -M:cljs -m shadow.cljs.devtools.cli compile app   # emits web/dist/js/main.js
+kbb -M:cljs -m shadow.cljs.devtools.cli compile app   # emits web/dist/js/main.js
 ```
 
 `deps.edn` resolves `io.github.kotoba-lang/appkit` by `:local/root` relative to
